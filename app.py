@@ -1,27 +1,20 @@
-import os
-from azure.ai.inference import ChatCompletionsClient
-from azure.ai.inference.models import SystemMessage, UserMessage
-from azure.core.credentials import AzureKeyCredential
+# from ai import get_ai_response
+# print("AI Chatbot started! Type 'quit' or exit")
+# print("=" * 50)
+# while True:
+#     user_input = input("you: ")
+#     if user_input.lower() == "quit":
+#         break
+#     response = get_ai_response(user_input)
+#     print(f"ai: {response}")
 
-endpoint = "https://models.github.ai/inference"
-model = "deepseek/DeepSeek-V3-0324"
-token = os.environ["GITHUB_TOKEN"]
+from flask import Flask
 
-client = ChatCompletionsClient(
-    endpoint=endpoint,
-    credential=AzureKeyCredential(token),
-)
+app = Flask(__name__)
 
-response = client.complete(
-    messages=[
-        SystemMessage("You are a helpful assistant.always answer in one word"),
-        UserMessage(input("your input: ")),
-    ],
-    temperature=1.0,
-    top_p=1.0,
-    max_tokens=1000,
-    model=model
-)
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
 
-print(response.choices[0].message.content)
-
+if __name__ == "__main__":
+    app.run(debug=True)
