@@ -14,8 +14,8 @@ client = ChatCompletionsClient(
 
 response = client.complete(
     messages=[
-        SystemMessage("You are a helpful assistant."),
-        UserMessage("What is the capital of France?"),
+        SystemMessage("You are a helpful assistant.always answer in one word"),
+        UserMessage(input("your input: ")),
     ],
     temperature=1.0,
     top_p=1.0,
